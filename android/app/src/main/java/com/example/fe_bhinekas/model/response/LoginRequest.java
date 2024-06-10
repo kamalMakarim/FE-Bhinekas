@@ -1,0 +1,10 @@
+package com.example.fe_bhinekas.model.response;
+
+public class LoginRequest {
+    public String username;
+    private String password;
+    public LoginRequest(String username, String password) {
+        this.username = username;
+        this.password = password;
+    }
+}
