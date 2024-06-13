@@ -16,6 +16,12 @@
         android:usesCleartextTraffic="true"
         tools:targetApi="34">
         <activity
+            android:name=".ViewBillActivity"
+            android:exported="false" />
+        <activity
+            android:name=".UpdateLogActivity"
+            android:exported="false" />
+        <activity
             android:name=".ManageTeachersActivity"
             android:exported="false" />
         <activity

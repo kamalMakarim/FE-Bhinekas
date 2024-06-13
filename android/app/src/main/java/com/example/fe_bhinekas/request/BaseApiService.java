@@ -1,6 +1,7 @@
 package com.example.fe_bhinekas.request;
 
 import com.example.fe_bhinekas.model.BaseResponse;
+import com.example.fe_bhinekas.model.Bill;
 import com.example.fe_bhinekas.model.Chat;
 import com.example.fe_bhinekas.model.Extracurricular;
 import com.example.fe_bhinekas.model.Kelas;
@@ -15,10 +16,12 @@ import java.util.List;
 
 import retrofit2.Call;
 import retrofit2.http.Body;
+import retrofit2.http.DELETE;
 import retrofit2.http.Field;
 import retrofit2.http.FormUrlEncoded;
 import retrofit2.http.GET;
 import retrofit2.http.POST;
+import retrofit2.http.PUT;
 import retrofit2.http.Query;
 
 public interface BaseApiService {
@@ -43,6 +46,12 @@ public interface BaseApiService {
     Call<BaseResponse<Log>> postLog(@Field("message") String message, @Field("class_id") String class_id, @Field("for_special_kids") boolean for_special_kids);
 
     @FormUrlEncoded
+    @PUT("log/updateLog")
+    Call<BaseResponse<Log>> updateLog(@Query("id") String log_id, @Field("message") String message, @Field("class_id") String class_id ,@Field("for_special_kids") boolean for_special_kids);
+    @DELETE("log/deleteLog")
+    Call<BaseResponse<Log>> deleteLog(@Query("id") String log_id);
+
+    @FormUrlEncoded
     @POST("admin/addUser")
     Call<BaseResponse<User>> addUser(@Field("username") String username, @Field("password") String password, @Field("display_name") String display_name, @Field("role") String role);
 
@@ -54,4 +63,9 @@ public interface BaseApiService {
 
     @GET("admin/getAllExtracurriculars")
     Call<BaseResponse<List<Extracurricular>>> getAllExtracurriculars();
+
+    @GET("bill/getBill")
+    Call<BaseResponse<List<Bill>>> getBill(@Query("student_id") String student_id);
+
+
 }

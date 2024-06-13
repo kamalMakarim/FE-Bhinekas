@@ -37,8 +37,6 @@ public class ParentMainActivity extends AppCompatActivity {
     private Spinner myStudentsSpinner;
     private ListView logListView;
     private Button billButton;
-    private Button infoButton;
-    private LinearLayout logContainer;
     private List<Log> listLogs;
     public static Student selectedStudent;
 
@@ -56,7 +54,6 @@ public class ParentMainActivity extends AppCompatActivity {
         myStudentsSpinner = findViewById(R.id.MyStudents);
         logListView = findViewById(R.id.Logs);
         billButton = findViewById(R.id.bill);
-        infoButton = findViewById(R.id.info);
 
         // Fill the spinner
         List<Student> students = LoginActivity.loggedParent.students;
@@ -72,20 +69,10 @@ public class ParentMainActivity extends AppCompatActivity {
         billButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Toast.makeText(ParentMainActivity.this, "Bill button clicked", Toast.LENGTH_SHORT).show();
-                // Handle Bill button click
+                moveActivity(mContext, ViewBillActivity.class);
             }
         });
 
-        infoButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Toast.makeText(ParentMainActivity.this, "Info button clicked", Toast.LENGTH_SHORT).show();
-                // Handle Info button click
-            }
-        });
-
-        // Set up a listener for the spinner
         myStudentsSpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {

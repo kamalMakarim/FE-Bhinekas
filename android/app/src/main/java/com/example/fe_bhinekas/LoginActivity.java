@@ -72,17 +72,23 @@ public class LoginActivity extends AppCompatActivity {
                 if(body != null){
                     if(body.message.equals("Login success")){
                         if(body.payload.parent_id != null){
+                            loggedAdmin = null;
+                            loggedTeacher = null;
                             loggedParent = new Parent(body.payload.user_id, body.payload.username, body.payload.password, body.payload.display_name, body.payload.parent_id, Arrays.asList(body.payload.students));
                             loggedUser = new User(body.payload.user_id, body.payload.username, body.payload.password, body.payload.display_name);
                             Toast.makeText(mContext, "Login success", Toast.LENGTH_SHORT).show();
                             moveActivity(mContext, ParentMainActivity.class);
                         } else if (body.payload.teacher_id != null){
+                            loggedAdmin = null;
+                            loggedParent = null;
                             loggedTeacher = new Teacher(body.payload.user_id, body.payload.username, body.payload.password, body.payload.display_name, body.payload.teacher_class, body.payload.teacher_id);
                             loggedUser = new User(body.payload.user_id, body.payload.username, body.payload.password, body.payload.display_name);
                             Toast.makeText(mContext, "Login success", Toast.LENGTH_SHORT).show();
                             System.out.println(loggedTeacher);
                             moveActivity(mContext, TeacherMainActivity.class);
                         } else if(body.payload.admin_id != null){
+                            loggedParent = null;
+                            loggedTeacher = null;
                             loggedAdmin = new Admin(body.payload.user_id, body.payload.username, body.payload.password, body.payload.display_name, body.payload.admin_id);
                             loggedUser = new User(body.payload.user_id, body.payload.username, body.payload.password, body.payload.display_name);
                             Toast.makeText(mContext, "Login success", Toast.LENGTH_SHORT).show();

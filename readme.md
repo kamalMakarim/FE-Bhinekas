@@ -1,5 +1,6 @@
 # Frontend Documentation
-
+Frontend untuk sekolah bukom (buku kominikasi) sekolah bhinekas. Bukom sendiri berfungsi untuk menghubungkan orang tua dan guru mengenai kegiatan anak di dalam sekolah. Berikut link untuk backend
+https://github.com/kamalMakarim/BE-Bhinekas
 ## Table of Contents
 - [Introduction](#introduction)
 - [Project Structure](#project-structure)
@@ -78,10 +79,14 @@ The project structure is organized as follows:
   - StudentAdapter
   - TeacherMainActivity
 
+## Flowchart
+![alt text](image-8.png)
+
 ## Activities
 
 ### AddUserActivity
 This activity allows the admin to add new users.
+![alt text](image-9.png)
 
 ### AdminMainActivity
 This is the main activity for admin users, providing navigation to other admin-related activities.
@@ -116,6 +121,10 @@ Allows teachers to post new log entries.
 ### TeacherMainActivity
 Main activity for teacher users, providing navigation to other teacher-related activities.
 ![alt text](image-6.png)
+
+### UpdateLogActivity
+Activity to update changes for a selected log
+![alt text](image-10.png)
 
 ## Adapters
 

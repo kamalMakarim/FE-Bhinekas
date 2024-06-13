@@ -133,6 +133,8 @@ public class TeacherMainActivity extends AppCompatActivity {
         private TextView message;
         private TextView date;
         private View log_vew_container;
+        private Button updateButton;
+        private Button deleteButton;
         public LogArrayAdapter(Context context, List<Log> logs){
             super(context, 0, logs);
         }
@@ -144,11 +146,13 @@ public class TeacherMainActivity extends AppCompatActivity {
         public View getView(int position, View convertView, @NonNull ViewGroup parent) {
             Log log = getItem(position);
             if (convertView == null) {
-                convertView = LayoutInflater.from(getContext()).inflate(R.layout.log_view, parent, false);
+                convertView = LayoutInflater.from(getContext()).inflate(R.layout.log_view_teacher, parent, false);
             }
             log_vew_container = convertView.findViewById(R.id.log_view_container);
             message = convertView.findViewById(R.id.message);
             date = convertView.findViewById(R.id.date);
+            updateButton = convertView.findViewById(R.id.button_update);
+            deleteButton = convertView.findViewById(R.id.button_delete);
             //make the message only up to 15 characters
             String shownMessage = log.message;
             if(log.message.length() > 15){
@@ -163,8 +167,48 @@ public class TeacherMainActivity extends AppCompatActivity {
                     moveActivity(mContext, LogDetailActivity.class);
                 }
             });
+            updateButton.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    selectedLog = log;
+                    moveActivity(mContext, UpdateLogActivity.class);
+                }
+            });
+
+            deleteButton.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    handleDeleteLog(log);
+                }
+            });
             return convertView;
         }
+    }
+
+    private void handleDeleteLog(Log log){
+        mApiService.deleteLog(log.id).enqueue(new Callback<BaseResponse<Log>>() {
+            @Override
+            public void onResponse(Call<BaseResponse<Log>> call, Response<BaseResponse<Log>> response) {
+                if(response.isSuccessful()){
+                    BaseResponse<Log> body = response.body();
+                    if(body != null && "Log deleted".equals(body.message)){
+                        Toast.makeText(mContext, "Log deleted successfully", Toast.LENGTH_SHORT).show();
+                        getLogs(selectedStudent.student_class.id, selectedStudent.special_needs);
+                    } else {
+                        Toast.makeText(mContext, "Failed to delete log", Toast.LENGTH_SHORT).show();
+                    }
+                } else {
+                    System.out.println(response.errorBody());
+                    Toast.makeText(mContext, "Failed to delete log", Toast.LENGTH_SHORT).show();
+                }
+            }
+
+            @Override
+            public void onFailure(Call<BaseResponse<Log>> call, Throwable t) {
+                System.out.println(t.getMessage());
+                Toast.makeText(mContext, "Failed to delete log", Toast.LENGTH_SHORT).show();
+            }
+        });
     }
 
     private void getMyStudents(){
@@ -189,7 +233,6 @@ public class TeacherMainActivity extends AppCompatActivity {
 
             @Override
             public void onFailure(Call<BaseResponse<List<Student>>> call, Throwable t) {
-                System.out.println(t.getMessage());
                 Toast.makeText(mContext, "Failed to get students", Toast.LENGTH_SHORT).show();
             }
         });

@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:padding="24dp"
+    android:background="@color/background_color"
+    tools:context=".UpdateLogActivity">
+
+    <!-- Title Text -->
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Update Log"
+        android:textSize="24sp"
+        android:textColor="@color/colorPrimary"
+        android:gravity="center_horizontal"
+        android:layout_marginBottom="16dp"/>
+
+    <!-- EditText for Message Input -->
+    <EditText
+        android:id="@+id/editTextMessage"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="Enter message here..."
+        android:inputType="textMultiLine"
+        android:minLines="3"
+        android:maxLines="5"
+        android:gravity="top"
+        android:background="@drawable/edit_text_background"
+        android:padding="12dp"/>
+
+    <!-- Switch for Special Needs -->
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="24dp"
+        android:orientation="horizontal"
+        android:gravity="center_vertical">
+
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="For special needs:"
+            android:textSize="18sp"
+            android:textColor="@color/secondary_text"/>
+
+        <Switch
+            android:id="@+id/switchSpecialNeeds"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:thumb="@drawable/switch_thumb"
+            android:track="@drawable/switch_track"/>
+    </LinearLayout>
+
+    <!-- Button to Submit Log -->
+    <Button
+        android:id="@+id/buttonSubmitLog"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="32dp"
+        android:text="Submit Update"
+        android:background="@drawable/button_background"
+        android:textColor="@android:color/white"
+        android:textSize="18sp"/>
+</LinearLayout>
